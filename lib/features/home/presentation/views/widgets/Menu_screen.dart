@@ -7,6 +7,7 @@ import 'package:book_app/core/widgets/custom_option_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/widgets/custom_language_column.dart';
 import '../../../../../core/widgets/custom_theme_column.dart';
 
 class MenuScreen extends StatelessWidget {
@@ -44,7 +45,7 @@ class MenuScreen extends StatelessWidget {
                 child: CustomRowItem(
                   iconData: Icons.language,
                   text: 'Language',
-                  arrowStatus: AppCubit.get(context).isThemeContainerOpen,
+                  arrowStatus: AppCubit.get(context).isLanguageContainerOpen,
                 ),
               ),
             ),
@@ -52,7 +53,7 @@ class MenuScreen extends StatelessWidget {
               const SizedBox(height: 10),
               CustomDivider(),
               const SizedBox(height: 5),
-              //buildLanguageColumn(cubit, state,context),
+              CustomLanguageColumn(),
             ],
             Divider(color: AppCubit.get(context).primaryColor,),
             Padding(

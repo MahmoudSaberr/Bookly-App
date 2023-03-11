@@ -1,13 +1,12 @@
-import 'package:book_app/constants.dart';
 import 'package:book_app/core/cubit/app_cubit.dart';
 import 'package:book_app/core/helper/cashe_helper.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'core/cubit/app_state.dart';
 import 'core/theme/custom_theme.dart';
+import 'core/utils/app_local.dart';
 import 'core/utils/app_router.dart';
 import 'core/utils/service_locator.dart';
 import 'features/home/data/repos/home_repo_impl.dart';
@@ -18,22 +17,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
   bool firstMode = CacheHelper.getData(key: "isLight")??false;
-  await EasyLocalization.ensureInitialized();
   setupServiceLocator();
-  runApp(
-      EasyLocalization(
-        path: 'assets/translations',
-        supportedLocales: const [
-          Locale(kEnglish,kUnitedState),
-          Locale(kArabic,kEgypt)
-        ],
-        saveLocale: true,
-        fallbackLocale: const Locale(kEnglish,kUnitedState),
 
-        child: MyApp(
-          firstMode: firstMode,
-        ),
-      )
+  runApp(MyApp(firstMode: firstMode,),
   );
 }
 
@@ -57,20 +43,64 @@ class MyApp extends StatelessWidget {
           )..fetchNewestBooks(),
         ),
         BlocProvider(
-          create: (context) => AppCubit()..getFirstMode(firstMode),
+          create: (context) => AppCubit()..getFirstMode(firstMode)..getSavedLanguage(),
         )
       ],
       child: BlocBuilder<AppCubit, AppState>(
         builder: (context, state) {
+          if (state is ChangeLocalState) {
+            return MaterialApp.router (
+              locale: state.locale,
+              supportedLocales: const [
+                Locale('en', ""),
+                Locale("ar", ""),
+              ],
+              localizationsDelegates: const [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              localeResolutionCallback: (currentLocal, supportedLocales) {
+                for (var locale in supportedLocales) {
+                  if (currentLocal != null &&
+                      currentLocal.languageCode == locale.languageCode) {
+                    return currentLocal;
+                  }
+                }
+                return supportedLocales.first;
+              },
+              routerConfig: AppRouter.router,
+              debugShowCheckedModeBanner: false,
+              themeMode: AppCubit.get(context).themeMode
+                  ? ThemeMode.dark
+                  : ThemeMode.light,
+              theme: CustomTheme.lightTheme(context),
+              darkTheme: CustomTheme.darkTheme(context),
+            );
+          }
+
+/*
           return MaterialApp.router(
-            supportedLocales: context.supportedLocales,
-            localizationsDelegates: [
+            supportedLocales: const [
+              Locale('en', ""),
+              Locale("ar", ""),
+            ],
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
-              EasyLocalization.of(context)!.delegate,
             ],
-            locale: context.locale,
+            localeResolutionCallback: (currentLocal, supportedLocales) {
+              for (var locale in supportedLocales) {
+                if (currentLocal != null &&
+                    currentLocal.languageCode == locale.languageCode) {
+                  return currentLocal;
+                }
+              }
+              return supportedLocales.first;
+            },
             routerConfig: AppRouter.router,
             debugShowCheckedModeBanner: false,
             themeMode: AppCubit.get(context).themeMode
@@ -79,7 +109,10 @@ class MyApp extends StatelessWidget {
             theme: CustomTheme.lightTheme(context),
             darkTheme: CustomTheme.darkTheme(context),
           );
-          },
+*/
+          //Lag in Drawer
+          return const SizedBox();
+        },
       ),
     );
   }

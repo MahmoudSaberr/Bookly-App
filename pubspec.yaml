@@ -30,7 +30,6 @@ dependencies:
   shimmer: ^2.0.0
   shared_preferences: ^2.0.18
   flutter_zoom_drawer: ^3.0.4+1
-  easy_localization: ^3.0.1
   flutter_localizations:
     sdk: flutter
 
@@ -47,7 +46,8 @@ flutter:
 
   assets:
     - assets/images/
-    - assets/translations/
+    - assets/lang/ar.json
+    - assets/lang/en.json
 
   fonts:
     - family: GT Sectra Fine

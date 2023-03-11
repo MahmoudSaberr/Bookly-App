@@ -48,9 +48,29 @@ class AppCubit extends Cubit<AppState> {
       value: primaryColorIndex,
     );
   }
+/////////////////////////////
 
-  String appLanguage = 'ar'; // en --or-- ar
+  void getSavedLanguage() {
+    final cachedLanguageCode = CacheHelper.getCachedLanguage();
+    emit(ChangeLocalState(locale: Locale(cachedLanguageCode)));
+  }
+
+  Future<void> changeLanguage(String languageCode) async {
+    await CacheHelper.cacheLanguage(languageCode);
+    emit(ChangeLocalState(locale: Locale(languageCode)));
+  }
+/////////////////////////////////
+
+
+  String appLanguage = 'en'; // en --or-- ar
   int changingLanguage = 0;
+  bool isLanguageContainerOpen = false;
+
+  void changeLanguageContainerStatus() {
+    isLanguageContainerOpen = !isLanguageContainerOpen;
+    emit(ChangeLanguageContainerStatusState());
+  }
+
   void changeAppLanguage(String newValue) {
     appLanguage = newValue;
     changingLanguage = 1;
@@ -67,19 +87,6 @@ class AppCubit extends Cubit<AppState> {
   }
 
   bool isThemeContainerOpen = false;
-
-  void changeThemeContainerStatus() {
-    isThemeContainerOpen = !isThemeContainerOpen;
-    emit(ChangeThemeContainerStatusState());
-  }
-
-  bool isLanguageContainerOpen = false;
-
-  void changeLanguageContainerStatus() {
-    isLanguageContainerOpen = !isLanguageContainerOpen;
-    emit(ChangeLanguageContainerStatusState());
-  }
-
   bool themeMode = false;
   Color textColor = Colors.black;
   void changeTheme() {
@@ -87,6 +94,11 @@ class AppCubit extends Cubit<AppState> {
 
     CacheHelper.saveBoolData(key: "isLight", value: themeMode);
     emit(ThemeChangedState());
+  }
+
+  void changeThemeContainerStatus() {
+    isThemeContainerOpen = !isThemeContainerOpen;
+    emit(ChangeThemeContainerStatusState());
   }
 
   getFirstMode(mode) {

@@ -1,7 +1,6 @@
 import 'package:book_app/constants.dart';
 import 'package:book_app/core/cubit/app_cubit.dart';
 import 'package:book_app/core/widgets/custom_radio_list_tile.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class CustomLanguageColumn extends StatelessWidget {
@@ -16,8 +15,7 @@ class CustomLanguageColumn extends StatelessWidget {
           radioValue: kEnglish,
           groupValue: AppCubit.get(context).appLanguage,
           onChangedFun: (newVal) {
-            AppCubit.get(context).changeAppLanguage(newVal!);
-            EasyLocalization.of(context)!.setLocale(const Locale(kEnglish, kUnitedState));
+            AppCubit.get(context).changeLanguage(newVal!);
           },
           titleText: 'English',
         ),
@@ -25,8 +23,7 @@ class CustomLanguageColumn extends StatelessWidget {
           radioValue: kArabic,
           groupValue: AppCubit.get(context).appLanguage,
           onChangedFun: (newVal) {
-            AppCubit.get(context).changeAppLanguage(newVal!);
-            EasyLocalization.of(context)!.setLocale(const Locale(kArabic,kEgypt));
+            AppCubit.get(context).changeLanguage(newVal!);
           },
           titleText: 'arabic',
         ),
