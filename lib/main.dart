@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+import 'constants.dart';
 import 'core/cubit/app_state.dart';
+import 'core/cubit/bloc_observer.dart';
 import 'core/theme/custom_theme.dart';
-import 'core/utils/app_local.dart';
 import 'core/utils/app_router.dart';
+import 'core/utils/localizations.dart';
 import 'core/utils/service_locator.dart';
 import 'features/home/data/repos/home_repo_impl.dart';
 import 'features/home/presentation/view_model/featured_books_cubit/featured_books_cubit.dart';
@@ -16,11 +18,14 @@ import 'features/home/presentation/view_model/newest_books_cubit/newset_books_cu
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
-  bool firstMode = CacheHelper.getData(key: "isLight")??false;
+  currentLocaleApp = Locale(await CacheHelper.getData(key: "current_locale_app")?? "en");
+  bool firstMode = CacheHelper.getData(key: "isLight") ?? false;
   setupServiceLocator();
-
-  runApp(MyApp(firstMode: firstMode,),
-  );
+  BlocOverrides.runZoned(
+      () => runApp(MyApp(
+            firstMode: firstMode,
+          )),
+      blocObserver: AppBlocObserver());
 }
 
 class MyApp extends StatelessWidget {
@@ -43,61 +48,28 @@ class MyApp extends StatelessWidget {
           )..fetchNewestBooks(),
         ),
         BlocProvider(
-          create: (context) => AppCubit()..getFirstMode(firstMode)..getSavedLanguage(),
+          create: (context) => AppCubit()..getFirstMode(firstMode),
         )
       ],
       child: BlocBuilder<AppCubit, AppState>(
         builder: (context, state) {
-          if (state is ChangeLocalState) {
-            return MaterialApp.router (
-              locale: state.locale,
-              supportedLocales: const [
-                Locale('en', ""),
-                Locale("ar", ""),
-              ],
-              localizationsDelegates: const [
-                AppLocalizations.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
-              localeResolutionCallback: (currentLocal, supportedLocales) {
-                for (var locale in supportedLocales) {
-                  if (currentLocal != null &&
-                      currentLocal.languageCode == locale.languageCode) {
-                    return currentLocal;
-                  }
-                }
-                return supportedLocales.first;
-              },
-              routerConfig: AppRouter.router,
-              debugShowCheckedModeBanner: false,
-              themeMode: AppCubit.get(context).themeMode
-                  ? ThemeMode.dark
-                  : ThemeMode.light,
-              theme: CustomTheme.lightTheme(context),
-              darkTheme: CustomTheme.darkTheme(context),
-            );
-          }
-
-/*
           return MaterialApp.router(
-            supportedLocales: const [
-              Locale('en', ""),
-              Locale("ar", ""),
+            locale: currentLocaleApp,    // Todo: actually App's language ( which will passed to my delegate to get json files )
+            localizationsDelegates: [
+              GlobalMaterialLocalizations.delegate,                                 // Todo: get the directions for names for specific widgets depending on Device language
+              GlobalCupertinoLocalizations.delegate,                                // Todo: get the directions for names for specific widgets depending on Device language
+              GlobalWidgetsLocalizations.delegate,                                  // Todo: get the directions for widgets depending on Device language
+              MyLocalizations.delegate,                                             // Todo: Calling The Delegate which I created to load data from json files
             ],
-            localizationsDelegates: const [
-              AppLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
+            supportedLocales: const
+            [
+              Locale("ar"),
+              Locale("en","US"),
             ],
-            localeResolutionCallback: (currentLocal, supportedLocales) {
-              for (var locale in supportedLocales) {
-                if (currentLocal != null &&
-                    currentLocal.languageCode == locale.languageCode) {
-                  return currentLocal;
-                }
+            localeResolutionCallback : (deviceLocale,supportedLocales) {
+              for( var locale in supportedLocales )
+              {
+                if( locale.languageCode == deviceLocale!.languageCode ) return deviceLocale;
               }
               return supportedLocales.first;
             },
@@ -109,9 +81,6 @@ class MyApp extends StatelessWidget {
             theme: CustomTheme.lightTheme(context),
             darkTheme: CustomTheme.darkTheme(context),
           );
-*/
-          //Lag in Drawer
-          return const SizedBox();
         },
       ),
     );

@@ -1,10 +1,9 @@
 
 import 'package:book_app/core/cubit/app_cubit.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ContainerColor extends StatelessWidget {
-  ContainerColor({
+  const ContainerColor({
   super.key,
   required this.index,
   required this.color,

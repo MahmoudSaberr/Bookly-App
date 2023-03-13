@@ -3,7 +3,7 @@ import 'package:book_app/core/cubit/app_cubit.dart';
 import 'package:flutter/material.dart';
 
 class CustomDivider extends StatelessWidget {
-  CustomDivider({super.key,});
+  const CustomDivider({super.key,});
 
   @override
   Widget build(BuildContext context) {

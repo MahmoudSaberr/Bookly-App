@@ -33,7 +33,10 @@ class CustomRowItem extends StatelessWidget {
           ),
           const Spacer(),
           Icon(
-            arrowStatus ? Icons.keyboard_arrow_down : Icons.keyboard_arrow_right,
+              arrowStatus ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
+              color: AppCubit.get(context).themeMode == false
+                  ? Colors.grey
+                  : Colors.white
           ),
         ],
       ),

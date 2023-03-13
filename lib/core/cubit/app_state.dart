@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 
 abstract class AppState {}
 
@@ -12,13 +11,13 @@ class PrimaryColorIndexState extends AppState {}
 
 class ChangeThemeContainerStatusState extends AppState {}
 
-class ChangeAppLanguageState extends AppState {}
+class ChangeAppLanguageLoadingState extends AppState {}
+
+class ChangeAppLanguageErrorState extends AppState {}
 
 class ChangeAppLanguageSuccessState extends AppState {}
 
 class GetFirstModeState extends AppState {}
 
-class ChangeLocalState extends AppState {
-  final Locale locale;
-  ChangeLocalState({required this.locale});
-}
+
+

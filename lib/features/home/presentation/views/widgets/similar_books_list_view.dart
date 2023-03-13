@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/widgets/custom_error_widget.dart';
-import '../../../../../core/widgets/custom_loading_indicator.dart';
 import '../../view_model/smilar_books_cubit/similar_books_cubit.dart';
 import '../shimmer/shimmer_similar_books_list_view.dart';
 import 'custom_book_item.dart';

@@ -1,4 +1,3 @@
-import 'package:bloc/bloc.dart';
 import 'package:book_app/constants.dart';
 import 'package:book_app/core/cubit/app_state.dart';
 import 'package:book_app/core/helper/cashe_helper.dart';
@@ -10,7 +9,7 @@ class AppCubit extends Cubit<AppState> {
     int? pcIndex =
     CacheHelper.getData(key: 'primaryColor');
     bool firstMode = CacheHelper.getData(key: "isLight")??false;
-    themeMode = firstMode ?? false;
+    themeMode = firstMode ;
     primaryColorIndex = pcIndex ?? 0;
     primaryColor = defaultColors[primaryColorIndex];
   }
@@ -18,7 +17,6 @@ class AppCubit extends Cubit<AppState> {
   static AppCubit get(context) => BlocProvider.of(context);
 
   int primaryColorIndex = 0;
-
 
   List defaultColors = [
     kPrimaryBlack,
@@ -48,22 +46,7 @@ class AppCubit extends Cubit<AppState> {
       value: primaryColorIndex,
     );
   }
-/////////////////////////////
 
-  void getSavedLanguage() {
-    final cachedLanguageCode = CacheHelper.getCachedLanguage();
-    emit(ChangeLocalState(locale: Locale(cachedLanguageCode)));
-  }
-
-  Future<void> changeLanguage(String languageCode) async {
-    await CacheHelper.cacheLanguage(languageCode);
-    emit(ChangeLocalState(locale: Locale(languageCode)));
-  }
-/////////////////////////////////
-
-
-  String appLanguage = 'en'; // en --or-- ar
-  int changingLanguage = 0;
   bool isLanguageContainerOpen = false;
 
   void changeLanguageContainerStatus() {
@@ -71,18 +54,17 @@ class AppCubit extends Cubit<AppState> {
     emit(ChangeLanguageContainerStatusState());
   }
 
-  void changeAppLanguage(String newValue) {
-    appLanguage = newValue;
-    changingLanguage = 1;
-    emit(ChangeAppLanguageState());
-    ////////////////
-    CacheHelper.saveStringData(
-      key: 'appLanguage',
-      value: appLanguage,
-    ).then((value) async {
-
-      changingLanguage = 0;
-      emit(ChangeAppLanguageSuccessState());
+  Future<void> changeAppLanguage({required Locale locale}) async {
+    await CacheHelper.saveStringData(key: "current_locale_app",value: locale.languageCode).then((value){
+      if( value == true )
+      {
+        currentLocaleApp = Locale(locale.languageCode);
+        emit(ChangeAppLanguageSuccessState());
+      }
+      else
+      {
+        emit(ChangeAppLanguageErrorState());
+      }
     });
   }
 
@@ -105,7 +87,6 @@ class AppCubit extends Cubit<AppState> {
     CacheHelper.saveBoolData(key: "isLight", value: mode);
     themeMode = CacheHelper.getData(key: "isLight");
     emit(GetFirstModeState());
-
   }
 
 }

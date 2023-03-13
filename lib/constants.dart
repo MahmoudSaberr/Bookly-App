@@ -68,3 +68,7 @@ const kEnglish = 'en';
 const kUnitedState = 'en';
 const kArabic = 'ar';
 const kEgypt = 'EG';
+
+TextDirection arabicDirection = TextDirection.rtl;    // Todo: عامله عشان اضبط اتجاه الكلام علي حسب الاخبار بتاع كل دوله
+
+Locale currentLocaleApp = const Locale("ar");

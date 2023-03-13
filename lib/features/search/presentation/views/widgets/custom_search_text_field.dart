@@ -1,6 +1,7 @@
+import 'package:book_app/core/utils/extensions_methods.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../../../../core/cubit/app_cubit.dart';
 import '../../view_model/search_cubit/search_cubit.dart';
 
 class CustomSearchTextField extends StatelessWidget {
@@ -20,9 +21,9 @@ class CustomSearchTextField extends StatelessWidget {
           );
         }
       },
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
         border: InputBorder.none,
-        hintText: 'Search',
+        hintText: "search".translate(context: context),
       ),
     );
   }

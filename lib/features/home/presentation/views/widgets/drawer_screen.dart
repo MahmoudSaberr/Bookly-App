@@ -14,30 +14,39 @@ class DrawerView extends StatefulWidget {
 }
 
 class _DrawerViewState extends State<DrawerView> {
-
   final zoomDrawerController = ZoomDrawerController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return ZoomDrawer(
       controller: zoomDrawerController,
-      menuScreen: const MenuScreen(), // s
-      mainScreen: const HomeView(), // et slideWidth
+      menuScreen: const MenuScreen(),
+      // s
+      mainScreen: const HomeView(),
+      // et slideWidth
       style: DrawerStyle.defaultStyle,
       moveMenuScreen: false,
       showShadow: true,
       angle: 0,
+      isRtl: currentLocaleApp.languageCode == "en" ? false : true,
       drawerShadowsBackgroundColor: Colors.grey.shade300,
-      shadowLayer1Color:
-      Theme.of(context).brightness == Brightness.dark ? kShadowOneColorDark
+      shadowLayer1Color: Theme.of(context).brightness == Brightness.dark
+          ? kShadowOneColorDark
           : kShadowOneColorLight,
-      shadowLayer2Color:
-      Theme.of(context).brightness == Brightness.dark ? kShadowTwoColorDark
+      shadowLayer2Color: Theme.of(context).brightness == Brightness.dark
+          ? kShadowTwoColorDark
           : kShadowTwoColorLight,
-      menuBackgroundColor:
-      Theme.of(context).brightness == Brightness.dark ? kMenuBackgroundColorDark
+      menuBackgroundColor: Theme.of(context).brightness == Brightness.dark
+          ? kMenuBackgroundColorDark
           : kMenuBackgroundColorLight,
-      slideWidth: MediaQuery.of(context).size.width * 0.8,
+      slideWidth: currentLocaleApp.languageCode == "en"
+          ? MediaQuery.of(context).size.width * 0.87
+          : MediaQuery.of(context).size.width * 0.85,
     );
   }
 }

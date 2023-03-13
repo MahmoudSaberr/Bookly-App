@@ -34,10 +34,10 @@ class CustomOptionRow extends StatelessWidget {
                       ? Colors.grey
                       : Colors.white
               ),
-              const SizedBox(width: 35,),
+              const SizedBox(width: 25,),
               Text(
                   title,
-                  style: Styles.textStyle18
+                  style: Styles.textStyle16
               ),
             ],
           ),

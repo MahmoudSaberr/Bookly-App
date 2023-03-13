@@ -28,4 +28,3 @@ abstract class Styles {
   );
 }
 
-const TextStyle textStyle = TextStyle();

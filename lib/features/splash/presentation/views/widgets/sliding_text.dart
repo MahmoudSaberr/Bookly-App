@@ -1,4 +1,8 @@
+import 'package:book_app/core/cubit/app_cubit.dart';
+import 'package:book_app/core/utils/extensions_methods.dart';
+import 'package:book_app/core/utils/styles.dart';
 import 'package:flutter/material.dart';
+
 
 class SlidingText extends StatelessWidget {
   const SlidingText({
@@ -15,9 +19,11 @@ class SlidingText extends StatelessWidget {
         builder: (context, _) {
           return SlideTransition(
             position: slidingAnimation,
-            child: const Text(
-              'Read Free Books',
+            child: Text(
+              "readFreeBooks".translate(context: context),
               textAlign: TextAlign.center,
+              style: Styles.textStyle14
+                  .copyWith(color: AppCubit.get(context).primaryColor),
             ),
           );
         });
