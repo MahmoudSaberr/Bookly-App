@@ -1,6 +1,7 @@
 import 'package:book_app/features/home/presentation/views/widgets/books_action.dart';
 import 'package:book_app/features/home/presentation/views/widgets/custom_book_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/utils/styles.dart';
 import '../../../data/models/book_model/book_model.dart';
@@ -24,18 +25,20 @@ class BookDetailsSection extends StatelessWidget {
             imageUrl: book.volumeInfo.imageLinks?.thumbnail ?? '',
           ),
         ),
-        const SizedBox(
-          height: 43,
+        SizedBox(
+          height: 43.h,
         ),
         Text(
           book.volumeInfo.title!,
+          maxLines: 4,
+          overflow: TextOverflow.ellipsis,
           style: Styles.textStyle30.copyWith(
             fontWeight: FontWeight.bold,
           ),
           textAlign: TextAlign.center,
         ),
-        const SizedBox(
-          height: 6,
+        SizedBox(
+          height: 6.h,
         ),
         Opacity(
           opacity: .7,
@@ -47,16 +50,16 @@ class BookDetailsSection extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(
-          height: 18,
+        SizedBox(
+          height: 18.h,
         ),
         BookRating(
           rating: book.volumeInfo.averageRating ?? 0,
           count: book.volumeInfo.ratingsCount ?? 0,
           mainAxisAlignment: MainAxisAlignment.center,
         ),
-        const SizedBox(
-          height: 37,
+        SizedBox(
+          height: 37.h,
         ),
         BooksAction(
           bookModel: book,

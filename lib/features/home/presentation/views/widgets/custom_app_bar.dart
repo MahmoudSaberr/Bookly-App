@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/cubit/app_state.dart';
 import '../../../../../core/utils/app_router.dart';
@@ -30,14 +31,14 @@ class CustomAppBar extends StatelessWidget {
                 FontAwesomeIcons.barsStaggered,
                 size: 22,
               )),
-          const SizedBox(
-            width: 4,
+          SizedBox(
+            width: 4.w,
           ),
           BlocBuilder<AppCubit, AppState>(
             builder: (context, state) {
               return Image.asset(
                 AssetsData.logo,
-                height: 18,
+                height: 18.h,
                 color: AppCubit
                     .get(context)
                     .primaryColor,

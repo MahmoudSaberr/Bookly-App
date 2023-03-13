@@ -7,6 +7,7 @@ import 'package:book_app/core/widgets/custom_divider.dart';
 import 'package:book_app/core/widgets/custom_option_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../constants.dart';
 import '../../../../../core/widgets/custom_theme_column.dart';
@@ -30,15 +31,15 @@ class MenuScreen extends StatelessWidget {
                 Center(
                   child: Image.asset(
                     AssetsData.logo,
-                    height: 40,
+                    height: 40.h,
                     color: cubit.primaryColor,
                   ),
                 ),
-                const SizedBox(
-                  height: 70,
+                SizedBox(
+                  height: 70.h,
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                  padding: EdgeInsets.symmetric(horizontal: 14.0.w),
                   child: InkWell(
                     splashColor: cubit.textColor.withOpacity(0.0),
                     highlightColor: cubit.textColor.withOpacity(0.0),
@@ -51,11 +52,11 @@ class MenuScreen extends StatelessWidget {
                   ),
                 ),
                 if (cubit.isLanguageContainerOpen) ...[
-                  const SizedBox(height: 10),
+                  SizedBox(height: 10.h),
                   const CustomDivider(),
-                  const SizedBox(height: 5),
+                  SizedBox(height: 5.h),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                    padding: EdgeInsets.symmetric(horizontal: 5.w),
                     child: CustomOptionRow(
                         title: currentLocaleApp.languageCode == "en"
                             ? "arabicLanguage".translate(context: context)
@@ -77,7 +78,7 @@ class MenuScreen extends StatelessWidget {
                   color: cubit.primaryColor,
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                  padding: EdgeInsets.symmetric(horizontal: 14.0.w),
                   child: InkWell(
                     splashColor: cubit.textColor.withOpacity(0.0),
                     highlightColor: cubit.textColor.withOpacity(0.0),
@@ -90,11 +91,11 @@ class MenuScreen extends StatelessWidget {
                   ),
                 ),
                 if (cubit.isThemeContainerOpen) ...[
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20.h),
                   const CustomDivider(),
-                  const SizedBox(height: 5),
+                  SizedBox(height: 5.h),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                    padding: EdgeInsets.symmetric(horizontal: 5.w),
                     child: CustomOptionRow(
                         title: Theme.of(context).brightness == Brightness.dark
                             ? "lightMode".translate(context: context)
@@ -105,7 +106,7 @@ class MenuScreen extends StatelessWidget {
                           cubit.changeTheme();
                         }),
                   ),
-                  const SizedBox(height: 15),
+                  SizedBox(height: 15.h),
                   const CustomThemeOptionColumn(),
                 ],
               ],

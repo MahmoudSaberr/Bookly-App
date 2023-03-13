@@ -4,8 +4,8 @@ import 'package:book_app/core/utils/styles.dart';
 import 'package:book_app/features/home/presentation/views/widgets/featured_list_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../core/cubit/app_cubit.dart';
 import 'best_seller_list_view.dart';
 import 'custom_app_bar.dart';
 
@@ -22,32 +22,32 @@ class HomeViewBody extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children:   [
-              const Padding(
+              Padding(
                   padding: EdgeInsets.symmetric(
-                    horizontal: 15,
+                    horizontal: 15.w,
                   ),
-                  child: CustomAppBar()),
+                  child: const CustomAppBar()),
               const FeaturedBooksListView(),
-              const SizedBox(
-                height: 50,
+              SizedBox(
+                height: 50.h,
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30),
+                padding: EdgeInsets.symmetric(horizontal: 30.w),
                 child: Text(
                   "newestBooks".translate(context: context),
                   style: Styles.textStyle18,
                 ),
               ),
-              const SizedBox(
-                height: 20,
+              SizedBox(
+                height: 20.h,
               ),
             ],
           ),
         ),
-        const SliverFillRemaining(
+        SliverFillRemaining(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30),
-            child: BestSellerListView(),
+            padding: EdgeInsets.symmetric(horizontal: 30.w),
+            child: const BestSellerListView(),
           ),
         ),
       ],

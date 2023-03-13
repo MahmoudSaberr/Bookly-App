@@ -1,6 +1,7 @@
 
 import 'package:book_app/core/cubit/app_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ContainerColor extends StatelessWidget {
   const ContainerColor({
@@ -15,14 +16,14 @@ class ContainerColor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  const EdgeInsets.symmetric(horizontal: 8.0),
+      padding:  EdgeInsets.symmetric(horizontal: 8.0.w),
       child: InkWell(
         onTap: () {
           AppCubit.get(context).changePrimaryColorIndex(index, color);
         },
         child: Container(
-          width: 20,
-          height: 20,
+          width: 20.w,
+          height: 20.h,
           decoration: BoxDecoration(
             color: color,
             borderRadius: BorderRadius.circular(8.0),

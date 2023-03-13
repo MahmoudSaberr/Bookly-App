@@ -4,6 +4,7 @@ import 'package:book_app/core/utils/extensions_methods.dart';
 import 'package:book_app/core/utils/styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'custom_container_color.dart';
 
@@ -21,9 +22,9 @@ class CustomThemeOptionColumn extends StatelessWidget {
           style: Styles.textStyle14,
           textAlign: TextAlign.center,
         ),
-        const SizedBox(height: 15.0),
+        SizedBox(height: 15.0.h),
         SizedBox(
-          height: 25,
+          height: 25.h,
           child: ListView.builder(
               itemCount:AppCubit.get(context).defaultColors.length ,
               scrollDirection: Axis.horizontal,

@@ -2,6 +2,7 @@
 import 'package:book_app/core/cubit/app_cubit.dart';
 import 'package:book_app/core/utils/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomRowItem extends StatelessWidget {
   CustomRowItem({
@@ -17,7 +18,7 @@ class CustomRowItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 40,
+      height: 40.h,
       child: Row(
         children: [
           Icon(

@@ -2,6 +2,7 @@
 import 'package:book_app/features/search/presentation/views/widgets/search_no_data_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../core/utils/app_router.dart';
@@ -19,7 +20,7 @@ class SearchViewBody extends StatelessWidget {
     return BlocBuilder<SearchCubit, SearchState>(builder: (context, state) {
       if (state is SearchSuccessState) {
         return ListView.separated(
-          padding: const EdgeInsets.symmetric(vertical: 10.0),
+          padding: EdgeInsets.symmetric(vertical: 10.0.h),
           itemCount: state.books.length,
           physics: const BouncingScrollPhysics(),
           itemBuilder: (context, index) => InkWell(
@@ -33,7 +34,7 @@ class SearchViewBody extends StatelessWidget {
               bookModel: state.books[index],
             ),
           ),
-          separatorBuilder: (context, index) => const SizedBox(height: 15.0),
+          separatorBuilder: (context, index) => SizedBox(height: 15.0.h),
         );
       } else if (state is SearchFailureState) {
         return CustomErrorWidget(errMessage: state.error);

@@ -1,12 +1,11 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/widgets/custom_error_widget.dart';
 import '../../view_model/smilar_books_cubit/similar_books_cubit.dart';
 import '../shimmer/shimmer_similar_books_list_view.dart';
 import 'custom_book_item.dart';
-
 
 class SimilarBooksListview extends StatelessWidget {
   const SimilarBooksListview({super.key});
@@ -23,11 +22,11 @@ class SimilarBooksListview extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                    padding: EdgeInsets.symmetric(horizontal: 5.w),
                     child: CustomBookImage(
                       imageUrl:
-                      state.books[index].volumeInfo.imageLinks?.thumbnail ??
-                          '',
+                          state.books[index].volumeInfo.imageLinks?.thumbnail ??
+                              '',
                     ),
                   );
                 }),

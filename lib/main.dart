@@ -3,6 +3,7 @@ import 'package:book_app/core/helper/cashe_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'constants.dart';
 import 'core/cubit/app_state.dart';
@@ -53,33 +54,40 @@ class MyApp extends StatelessWidget {
       ],
       child: BlocBuilder<AppCubit, AppState>(
         builder: (context, state) {
-          return MaterialApp.router(
-            locale: currentLocaleApp,    // Todo: actually App's language ( which will passed to my delegate to get json files )
-            localizationsDelegates: [
-              GlobalMaterialLocalizations.delegate,                                 // Todo: get the directions for names for specific widgets depending on Device language
-              GlobalCupertinoLocalizations.delegate,                                // Todo: get the directions for names for specific widgets depending on Device language
-              GlobalWidgetsLocalizations.delegate,                                  // Todo: get the directions for widgets depending on Device language
-              MyLocalizations.delegate,                                             // Todo: Calling The Delegate which I created to load data from json files
-            ],
-            supportedLocales: const
-            [
-              Locale("ar"),
-              Locale("en","US"),
-            ],
-            localeResolutionCallback : (deviceLocale,supportedLocales) {
-              for( var locale in supportedLocales )
-              {
-                if( locale.languageCode == deviceLocale!.languageCode ) return deviceLocale;
-              }
-              return supportedLocales.first;
+          return ScreenUtilInit(
+            designSize: const Size(360, 690),
+            minTextAdapt: true,
+            splitScreenMode: true,
+            builder: (context, child) {
+              return MaterialApp.router(
+                locale: currentLocaleApp,    // Todo: actually App's language ( which will passed to my delegate to get json files )
+                localizationsDelegates: [
+                  GlobalMaterialLocalizations.delegate,                                 // Todo: get the directions for names for specific widgets depending on Device language
+                  GlobalCupertinoLocalizations.delegate,                                  // Todo: get the directions for names for specific widgets depending on Device language
+                  GlobalWidgetsLocalizations.delegate,                                  // Todo: get the directions for widgets depending on Device language
+                  MyLocalizations.delegate,                                             // Todo: Calling The Delegate which I created to load data from json files
+                ],
+                supportedLocales: const
+                [
+                  Locale("ar"),
+                  Locale("en","US"),
+                ],
+                localeResolutionCallback : (deviceLocale,supportedLocales) {
+                  for( var locale in supportedLocales )
+                  {
+                    if( locale.languageCode == deviceLocale!.languageCode ) return deviceLocale;
+                  }
+                  return supportedLocales.first;
+                },
+                routerConfig: AppRouter.router,
+                debugShowCheckedModeBanner: false,
+                themeMode: AppCubit.get(context).themeMode
+                    ? ThemeMode.dark
+                    : ThemeMode.light,
+                theme: CustomTheme.lightTheme(context),
+                darkTheme: CustomTheme.darkTheme(context),
+              );
             },
-            routerConfig: AppRouter.router,
-            debugShowCheckedModeBanner: false,
-            themeMode: AppCubit.get(context).themeMode
-                ? ThemeMode.dark
-                : ThemeMode.light,
-            theme: CustomTheme.lightTheme(context),
-            darkTheme: CustomTheme.darkTheme(context),
           );
         },
       ),

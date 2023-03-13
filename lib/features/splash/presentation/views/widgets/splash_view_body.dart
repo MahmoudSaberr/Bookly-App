@@ -2,6 +2,7 @@ import 'package:book_app/core/cubit/app_cubit.dart';
 import 'package:book_app/features/splash/presentation/views/widgets/sliding_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../core/cubit/app_state.dart';
@@ -51,8 +52,8 @@ class _SplashViewbodyState extends State<SplashViewbody>
             );
           },
         ),
-        const SizedBox(
-          height: 4,
+        SizedBox(
+          height: 4.h,
         ),
         SlidingText(slidingAnimation: slidingAnimation),
       ],
@@ -62,7 +63,7 @@ class _SplashViewbodyState extends State<SplashViewbody>
   void initSlidingAnimation() {
     animationController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 1),
+      duration: const Duration(seconds: 2),
     );
 
     slidingAnimation =

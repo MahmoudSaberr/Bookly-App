@@ -2,7 +2,7 @@ import 'package:book_app/core/utils/extensions_methods.dart';
 import 'package:book_app/core/utils/styles.dart';
 import 'package:book_app/features/home/presentation/views/widgets/similar_books_list_view.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SimilarBooksSection extends StatelessWidget {
   const SimilarBooksSection({super.key});
@@ -18,8 +18,8 @@ class SimilarBooksSection extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
         ),
-        const SizedBox(
-          height: 16,
+        SizedBox(
+          height: 16.h,
         ),
         const SimilarBooksListview(),
       ],

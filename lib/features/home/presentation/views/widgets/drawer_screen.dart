@@ -3,6 +3,7 @@ import 'package:book_app/features/home/presentation/views/widgets/Menu_screen.da
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/config.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../home_view.dart';
 
@@ -45,8 +46,8 @@ class _DrawerViewState extends State<DrawerView> {
           ? kMenuBackgroundColorDark
           : kMenuBackgroundColorLight,
       slideWidth: currentLocaleApp.languageCode == "en"
-          ? MediaQuery.of(context).size.width * 0.87
-          : MediaQuery.of(context).size.width * 0.85,
+          ? 317.w
+          : 300.w,
     );
   }
 }

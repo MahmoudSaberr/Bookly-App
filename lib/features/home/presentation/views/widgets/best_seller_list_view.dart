@@ -1,6 +1,7 @@
 import 'package:book_app/features/home/presentation/views/shimmer/shimmer_newset_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/widgets/custom_error_widget.dart';
 import '../../view_model/newest_books_cubit/newset_books_cubit.dart';
@@ -21,7 +22,7 @@ class BestSellerListView extends StatelessWidget {
             itemCount: state.books.length,
             itemBuilder: (context, index) {
               return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
+                padding: EdgeInsets.symmetric(vertical: 10.h),
                 child: BestSellerListViewItem(
                   bookModel: state.books[index],
                 ),

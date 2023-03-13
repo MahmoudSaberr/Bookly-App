@@ -1,6 +1,7 @@
 import 'package:book_app/features/search/presentation/views/widgets/custom_search_text_field.dart';
 import 'package:book_app/features/search/presentation/views/widgets/search_view_body.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../view_model/search_cubit/search_cubit.dart';
@@ -14,7 +15,7 @@ class SearchView extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         leading: Padding(
-          padding: const EdgeInsets.only(left:20.0, right: 16),
+          padding: EdgeInsets.only(left:20.0.w, right: 16.w),
           child: IconButton(
             icon: const Icon(Icons.arrow_back_ios),
             onPressed: () {
@@ -25,7 +26,7 @@ class SearchView extends StatelessWidget {
         title: const CustomSearchTextField(),
         actions: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            padding: EdgeInsets.symmetric(horizontal: 20.0.w),
             child: IconButton(
               icon: const Icon(Icons.search),
               onPressed: () {

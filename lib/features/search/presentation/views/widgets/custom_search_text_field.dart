@@ -1,7 +1,6 @@
 import 'package:book_app/core/utils/extensions_methods.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../core/cubit/app_cubit.dart';
 import '../../view_model/search_cubit/search_cubit.dart';
 
 class CustomSearchTextField extends StatelessWidget {

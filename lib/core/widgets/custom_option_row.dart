@@ -3,6 +3,7 @@ import 'package:book_app/core/cubit/app_cubit.dart';
 import 'package:book_app/core/utils/styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomOptionRow extends StatelessWidget {
   CustomOptionRow({
@@ -21,7 +22,7 @@ class CustomOptionRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6.0,horizontal: 12),
+      padding:  EdgeInsets.symmetric(vertical: 6.0.h,horizontal: 12.w),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -34,10 +35,10 @@ class CustomOptionRow extends StatelessWidget {
                       ? Colors.grey
                       : Colors.white
               ),
-              const SizedBox(width: 25,),
+               SizedBox(width: 25.w,),
               Text(
                   title,
-                  style: Styles.textStyle16
+                  style: Styles.textStyle14
               ),
             ],
           ),

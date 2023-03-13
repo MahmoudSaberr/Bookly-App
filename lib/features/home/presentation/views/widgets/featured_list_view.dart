@@ -3,6 +3,7 @@ import 'package:book_app/features/home/presentation/views/widgets/custom_book_it
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../core/utils/app_router.dart';
@@ -25,7 +26,7 @@ class FeaturedBooksListView extends StatelessWidget {
               itemCount: state.books.length,
               // scrollDirection: Axis.horizontal,
               itemBuilder: (context, index, s) => Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    padding: EdgeInsets.symmetric(horizontal: 8.w),
                     child: GestureDetector(
                       onTap: () {
                         GoRouter.of(context).push(
